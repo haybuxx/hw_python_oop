@@ -55,8 +55,7 @@ class Training:
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
-        return InfoMessage(type(self).name,
-                           self.duration,
+        return InfoMessage(self.duration,
                            self.get_distance(),
                            self.get_mean_speed(),
                            self.get_spent_calories())
@@ -64,7 +63,7 @@ class Training:
 
 class Running(Training):
     """Тренировка: спортивная ходьба."""
-    TRAINING_TYPE: ClassVar[str] = 'Бег'
+    #TRAINING_TYPE: ClassVar[str] = 'Бег'
     CALORIES_MEAN_SPEED_MULTIPLIER: ClassVar[float] = 18
     CALORIES_MEAN_SPEED_SHIFT: ClassVar[float] = 1.79
 
