@@ -11,11 +11,11 @@ class InfoMessage:
 
     def __init__(self, training_type: str, duration:
                  float, distance: float, speed: float, calories: float):
-                 self.training_type = training_type
-                 self.duration = duration
-                 self.distance = distance
-                 self.speed = speed
-                 self.calories = calories
+                    self.training_type = training_type
+                    self.duration = duration
+                    self.distance = distance
+                    self.speed = speed
+                    self.calories = calories
 
     def get_message(self) -> str:
         return (f'Тип тренировки: {self.training_type};'
@@ -69,7 +69,7 @@ class Running(Training):
     CALORIES_MEAN_SPEED_SHIFT: ClassVar[float] = 1.79
 
     def get_spent_calories(self) -> float:
-        return((self.CALORIES_MEAN_SPEED_MULTIPLIER 
+        return ((self.CALORIES_MEAN_SPEED_MULTIPLIER
                 * self.get_mean_speed()
                 + self.CALORIES_MEAN_SPEED_SHIFT
                * self.weight / self.M_IN_KM
