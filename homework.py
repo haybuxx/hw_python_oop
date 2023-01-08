@@ -63,7 +63,6 @@ class Training:
 
 class Running(Training):
     """Тренировка: спортивная ходьба."""
-    #TRAINING_TYPE: ClassVar[str] = 'Бег'
     CALORIES_MEAN_SPEED_MULTIPLIER: ClassVar[float] = 18
     CALORIES_MEAN_SPEED_SHIFT: ClassVar[float] = 1.79
 
