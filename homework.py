@@ -1,4 +1,4 @@
-from typing import List, ClassVar
+from typing import List, ClassVar, Dict
 from os import name
 
 class InfoMessage:
@@ -130,7 +130,7 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
-    type_of_training: dict = {
+    type_of_training: Dict = {
         'SWM': Swimming,
         'RUN': Running,
         'WLK': SportsWalking
@@ -140,8 +140,6 @@ def read_package(workout_type: str, data: List[int]) -> Training:
         return class_type
     if workout_type not in type_of_training:
         raise ValueError('Сообщение об ошибке.')
-result = homework.read_package(input_data[0], input_data[1])
-    assert isinstance(result, expected)
 
 def main(training: Training) -> None:
     """Главная функция."""
@@ -159,5 +157,4 @@ if __name__ == '__main__':
     for workout_type, data in packages:
         training = str = read_package(workout_type, data)
         main(training)
-
 
