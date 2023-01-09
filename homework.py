@@ -114,7 +114,7 @@ class Swimming(Training):
                  weight: float,
                  length_pool: float,
                  count_pool: float) -> None:
-        """Метод принмает параметры плавания."""         
+        """Метод принмает параметры плавания."""
         super().__init__(action, duration, weight)
         self.length_pool = length_pool
         self.count_pool = count_pool
