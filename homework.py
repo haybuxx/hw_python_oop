@@ -2,6 +2,8 @@ from typing import List, ClassVar, Dict
 from dataclasses import dataclass
 
 @dataclass
+
+
 class InfoMessage:
     """Информационное сообщение о тренировке."""
     DURATION = float
