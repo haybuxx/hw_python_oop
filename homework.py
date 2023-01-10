@@ -3,10 +3,6 @@ from typing import List, ClassVar, Dict
 
 class InfoMessage:
     """Информационное сообщение о тренировке."""
-    DURATION = float
-    DISTANCE = float
-    SPEED = float
-    CALORIES = float
 
     def __init__(self, training_type: str, duration:
                  float, distance: float, speed: float, calories: float):
@@ -15,9 +11,9 @@ class InfoMessage:
         self.distance = distance
         self.speed = speed
         self.calories = calories
-        """Метод принимает пять параметров."""
 
     def get_message(self) -> str:
+        """Функция приводит вывод к трем цифрам после запятой."""
         return (f'Тип тренировки: {self.training_type};'
                 f' Длительность: {self.duration:.3f} ч.;'
                 f' Дистанция: {self.distance:.3f} км;'
@@ -32,12 +28,9 @@ class Training:
     MIN_IN_H: int = 60
     LEN_STEP: float = 0.65
 
-    action: int
-    duration: float
-    weight: float
-
     def __init__(self, action: float, duration: float, weight: float):
-        """Duration принимает секунды."""
+        """Duration принимает время в секундах,
+           action количество шагов, weight вес"""
         self.action = action
         self.duration = duration
         self.weight = weight
@@ -87,7 +80,7 @@ class SportsWalking(Training):
                  weight: float,
                  height: int) -> None:
         super().__init__(action, duration, weight)
-        """Метод принимает параметры."""
+        """Метод принимает параметры: шаги, время, вес, рост."""
         self.height = height
 
     def get_spent_calories(self) -> float:
@@ -138,8 +131,7 @@ def read_package(workout_type: str, data: List[int]) -> Training:
                               'RUN': Running,
                               'WLK': SportsWalking}
     if workout_type in type_of_training:
-        class_type: Training = type_of_training[workout_type](*data)
-        return class_type
+        return (type_of_training[workout_type](*data))
     else:
         raise ValueError('Сообщение об ошибке.')
 
