@@ -30,7 +30,7 @@ class Training:
 
     def __init__(self, action: float, duration: float, weight: float):
         """Duration принимает время в секундах,
-           action количество шагов, weight вес"""
+           action количество шагов, weight вес в киллограммах."""
         self.action = action
         self.duration = duration
         self.weight = weight
@@ -80,7 +80,8 @@ class SportsWalking(Training):
                  weight: float,
                  height: int) -> None:
         super().__init__(action, duration, weight)
-        """Метод принимает параметры: шаги, время, вес, рост."""
+        """Метод принимает параметры для расчета спорт ходьбы:
+           шаги, время в секундах, вес в киллограммах, рост в сантиметрах."""
         self.height = height
 
     def get_spent_calories(self) -> float:
@@ -107,7 +108,11 @@ class Swimming(Training):
                  weight: float,
                  length_pool: float,
                  count_pool: float) -> None:
-        """Метод принмает параметры плавания."""
+        """Метод принмает параметры для рассчета ср. скорости плавания,
+           затраченых каллорий при плавании. action: кол-во гребков,
+           duration: длительность тренировки в часах, weight: вес спортсмена
+           в киллограммах, length_pool: длина бассейна в метрах, count_pool:
+           сколько раз пользователь переплыл бассейн."""
         super().__init__(action, duration, weight)
         self.length_pool = length_pool
         self.count_pool = count_pool
@@ -127,11 +132,11 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
-    type_of_training: Dict = {'SWM': Swimming,
-                              'RUN': Running,
-                              'WLK': SportsWalking}
+    type_of_training: Dict[str: type[Training]] = {'SWM': Swimming,
+                                                   'RUN': Running,
+                                                   'WLK': SportsWalking}
     if workout_type in type_of_training:
-        return (type_of_training[workout_type](*data))
+        return type_of_training[workout_type](*data)
     else:
         raise ValueError('Сообщение об ошибке.')
 
