@@ -6,6 +6,14 @@ class InfoMessage:
 
     def __init__(self, training_type: str, duration:
                  float, distance: float, speed: float, calories: float):
+        """
+        Инициализация тренировки
+        :param training type - тип тренировки
+        :param duration - длительность тренировки в часах
+        :param distance - пройденное расстояние в километрах
+        :param speed - средняя скорость премещения километров в час
+        :param calories - потрачено каллорий во время тренировки.
+        """
         self.training_type = training_type
         self.duration = duration
         self.distance = distance
@@ -13,7 +21,7 @@ class InfoMessage:
         self.calories = calories
 
     def get_message(self) -> str:
-        """Функция приводит вывод к трем цифрам после запятой."""
+        """Округление результата тренировки до трех символов после запятой."""
         return (f'Тип тренировки: {self.training_type};'
                 f' Длительность: {self.duration:.3f} ч.;'
                 f' Дистанция: {self.distance:.3f} км;'
@@ -29,26 +37,30 @@ class Training:
     LEN_STEP: float = 0.65
 
     def __init__(self, action: float, duration: float, weight: float):
-        """Duration принимает время в секундах,
-           action количество шагов, weight вес в киллограммах."""
+        """
+        Инициализация тренирокви
+        :param action - количество действий(гребков или шагов)
+        :param duration - длительность в секундах
+        :param weight - вес пользователя в киллограммах.
+        """
         self.action = action
         self.duration = duration
         self.weight = weight
 
     def get_distance(self) -> float:
-        """Получить дистанцию в км."""
+        """Получаем дистанцию в км."""
         return self.action * self.LEN_STEP / self.M_IN_KM
 
     def get_mean_speed(self) -> float:
-        """Получить среднюю скорость движения."""
+        """Получаем среднюю скорость движения."""
         return self.get_distance() / self.duration
 
     def get_spent_calories(self) -> float:
-        """Получить количество затраченных калорий."""
+        """Получаем количество затраченных калорий."""
         raise NotImplementedError()
 
     def show_training_info(self) -> InfoMessage:
-        """Вернуть информационное сообщение о выполненной тренировке."""
+        """Возращаем информационное сообщение о выполненной тренировке."""
         return InfoMessage(self.__class__.__name__,
                            self.duration,
                            self.get_distance(),
@@ -80,8 +92,11 @@ class SportsWalking(Training):
                  weight: float,
                  height: int) -> None:
         super().__init__(action, duration, weight)
-        """Метод принимает параметры для расчета спорт ходьбы:
-           шаги, время в секундах, вес в киллограммах, рост в сантиметрах."""
+        """
+        Инициализация тренировки спортивная ходьба.
+        Добавлен новый параметр
+        :param height - рост пользователя в сантиметрах.
+        """
         self.height = height
 
     def get_spent_calories(self) -> float:
@@ -97,7 +112,6 @@ class SportsWalking(Training):
 
 class Swimming(Training):
     """Тренировка: плавание."""
-    TRAINING_TYPE: ClassVar[str] = 'Плавание'
     LEN_STEP: ClassVar[float] = 1.38
     CALORIES_MEAN_SPEED_SHIFT: ClassVar[float] = 1.1
     CALORIES_WEIGHT_MULTIPLIER: ClassVar[float] = 2.0
@@ -108,12 +122,13 @@ class Swimming(Training):
                  weight: float,
                  length_pool: float,
                  count_pool: float) -> None:
-        """Метод принмает параметры для рассчета ср. скорости плавания,
-           затраченых каллорий при плавании. action: кол-во гребков,
-           duration: длительность тренировки в часах, weight: вес спортсмена
-           в киллограммах, length_pool: длина бассейна в метрах, count_pool:
-           сколько раз пользователь переплыл бассейн."""
         super().__init__(action, duration, weight)
+        """
+        Инициализация тренировки плавание.
+        Добавлены два новых параметра
+        :param length_pool - длина бассейна в метрах
+        :param count_pool - сколько раз пользователь переплыл бассейн.
+        """
         self.length_pool = length_pool
         self.count_pool = count_pool
 
@@ -131,7 +146,7 @@ class Swimming(Training):
 
 
 def read_package(workout_type: str, data: List[int]) -> Training:
-    """Прочитать данные полученные от датчиков."""
+    """Прочитываем данные полученные от датчиков."""
     type_of_training: Dict[str: type[Training]] = {'SWM': Swimming,
                                                    'RUN': Running,
                                                    'WLK': SportsWalking}
