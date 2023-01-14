@@ -127,7 +127,7 @@ class Swimming(Training):
         Добавлены два новых параметра
         :param length_pool - длина бассейна в метрах
         :param count_pool - сколько раз пользователь переплыл бассейн.
-        """        
+        """
         self.length_pool = length_pool
         self.count_pool = count_pool
 
