@@ -86,14 +86,14 @@ class SportsWalking(Training):
     CALORIES_SPEED_HEIGHT_MULTIPLIER: ClassVar[float] = 0.029
     KMH_IN_MSEC: ClassVar[float] = 0.278
 
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 height: int) -> None:
+    def __init__(self, action: int, duration: float,
+                 weight: float, height: int) -> None:
         super().__init__(action, duration, weight)
         """
         Инициализация тренировки спортивная ходьба.
+        :param action - количество шагов
+        :param duration - длительность в секундах
+        :param weight - вес пользователя в киллограммах.
         Добавлен новый параметр
         :param height - рост пользователя в сантиметрах.
         """
@@ -116,19 +116,18 @@ class Swimming(Training):
     CALORIES_MEAN_SPEED_SHIFT: ClassVar[float] = 1.1
     CALORIES_WEIGHT_MULTIPLIER: ClassVar[float] = 2.0
 
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 length_pool: float,
-                 count_pool: float) -> None:
+    def __init__(self, action: int, duration: float, weight: float,
+                 length_pool: float, count_pool: float) -> None:
         super().__init__(action, duration, weight)
         """
         Инициализация тренировки плавание.
+        :param action - количество гребков
+        :param duration - длительность в секундах
+        :param weight - вес пользователя в киллограммах.
         Добавлены два новых параметра
         :param length_pool - длина бассейна в метрах
         :param count_pool - сколько раз пользователь переплыл бассейн.
-        """
+        """        
         self.length_pool = length_pool
         self.count_pool = count_pool
 
